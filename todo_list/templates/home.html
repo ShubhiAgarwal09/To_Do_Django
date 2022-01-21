@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissable alert-success fade show w-50" role="alert">
+        <button type="button" class="btn close" data-dismiss="alert" aria-label="close">
+            <small><sup>x</sup></small>
+        </button>
+        {{message}}
+    </div>
+    {% endfor %}
+{% endif %}
+{% if all_items %}
+    <table class="table table-bordered">
+    {% for things in all_items %}
+        {% if things.completed %}
+            <tr class="table-secondary">
+                <td style="text-decoration: line-through;" ><a href="{% url 'edit' things.id %}">{{things.item}}</a></td>
+                <td > <center><a style="background-color:rgb(76, 243, 90); color:white; padding: 5px; border-radius: 5px; text-decoration: none;" href="{% url 'not_done' things.id %}">Done</a></center></td>
+                <td><center> <a style="background-color:rgb(95, 255, 255); color:rgb(0, 0, 0); padding: 5px; border-radius: 5px; text-decoration: none;" href="{% url 'delete' things.id%}">Delete</a> </center></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td><a style="text-decoration: none; color: black;" href="{% url 'edit' things.id %}">{{things.item}} (EDIT)</a></td>
+                <td> <center><a style="background-color:rgb(248, 123, 123);  color:white; padding: 5px; border-radius: 5px; text-decoration: none;" href="{% url 'done' things.id %}">Not Done</a></center></td>
+                <td><center> <a style="background-color:rgb(95, 255, 255); color:rgb(0, 0, 0); padding: 10px; border-radius: 5px; text-decoration: none;" href="{% url 'delete' things.id%}">Delete</a> </center></td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
