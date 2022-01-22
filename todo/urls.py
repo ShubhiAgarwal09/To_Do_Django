@@ -21,8 +21,8 @@ from django.views import generic
 # from django.conf.urls import url
 
 urlpatterns = [
-    #path('',include('todo_list.urls')), 
-    path("",generic.TemplateView.as_view(template_name="todo_list.urls")), 
+    path('',include('todo_list.urls')), 
+    #path("",generic.TemplateView.as_view(template_name="todo_list.urls")), 
     path('admin/', admin.site.urls),
     
 
